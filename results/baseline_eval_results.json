@@ -1,0 +1,75 @@
+{
+  "dataset": "data\\ragtruth_test.json",
+  "n_samples": 5,
+  "results": [
+    {
+      "name": "Plain NLI (no retrieval)",
+      "precision": 0.06666666666666667,
+      "recall": 0.3333333333333333,
+      "f1": 0.1111111111111111,
+      "f1_ci_95": [
+        0.0,
+        0.24999999999999997
+      ],
+      "latency_ms": 1755.1617999997688,
+      "per_class": {
+        "SUPPORTED": 0.0,
+        "UNSUPPORTED": 0.3333333333333333,
+        "CONTRADICTED": 0.0
+      }
+    },
+    {
+      "name": "MiniCheck NLI (standalone)",
+      "precision": 0.19999999999999998,
+      "recall": 0.3333333333333333,
+      "f1": 0.25,
+      "f1_ci_95": [
+        0.11111111111111112,
+        0.3333333333333333
+      ],
+      "latency_ms": 5427.852279999934,
+      "per_class": {
+        "SUPPORTED": 0.0,
+        "UNSUPPORTED": 0.0,
+        "CONTRADICTED": 0.75
+      }
+    },
+    {
+      "name": "TrustRAG (DeBERTa-small)",
+      "precision": 0.06666666666666667,
+      "recall": 0.3333333333333333,
+      "f1": 0.1111111111111111,
+      "f1_ci_95": [
+        0.0,
+        0.24999999999999997
+      ],
+      "latency_ms": 355.05017999967095,
+      "per_class": {
+        "SUPPORTED": 0.0,
+        "UNSUPPORTED": 0.3333333333333333,
+        "CONTRADICTED": 0.0
+      }
+    },
+    {
+      "name": "TrustRAG + MiniCheck (Ours)",
+      "precision": 0.27777777777777773,
+      "recall": 0.4444444444444444,
+      "f1": 0.3,
+      "f1_ci_95": [
+        0.0,
+        0.5555555555555555
+      ],
+      "latency_ms": 3012.0919399996637,
+      "per_class": {
+        "SUPPORTED": 0.0,
+        "UNSUPPORTED": 0.5,
+        "CONTRADICTED": 0.4
+      }
+    }
+  ],
+  "mcnemar_significance": {
+    "TrustRAG + MiniCheck (Ours) vs Plain NLI (no retrieval)": 1.0,
+    "TrustRAG + MiniCheck (Ours) vs MiniCheck NLI (standalone)": 1.0,
+    "TrustRAG + MiniCheck (Ours) vs TrustRAG (DeBERTa-small)": 1.0
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "total_cases": 50,
+  "correct": 13,
+  "errors": 37,
+  "accuracy": 0.26,
+  "category_counts": {
+    "CORRECT": 13,
+    "NUMERICAL": 28,
+    "NEGATION": 0,
+    "PARAPHRASE": 0,
+    "RETRIEVAL_FAIL": 9,
+    "MULTI_HOP": 0,
+    "OTHER": 0
+  },
+  "category_percentages": {
+    "NUMERICAL": 75.7,
+    "NEGATION": 0.0,
+    "PARAPHRASE": 0.0,
+    "RETRIEVAL_FAIL": 24.3,
+    "MULTI_HOP": 0.0,
+    "OTHER": 0.0
+  },
+  "examples": {
+    "CORRECT": [],
+    "NUMERICAL": [
+      {
+        "case_id": "case-1",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Based on the provided structured data, here is an objective overview of PizzaMan Dan's:\n\nPizzaMan Dan's is a popular restaurant located in Carpinteria, California, offering a wide range of menu option",
+        "evidence": "\n{'name': \"PizzaMan Dan's\", 'address': '699 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Chicken Wings, Restaurants, Beer, Wine & Spirits, Sandwiches, Food, Pizza, Italian', 'hour",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-2",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Pollofino's is a Mexican restaurant located in Goleta, CA, with a 4.0-star rating based on 3 reviews. The restaurant is known for its delicious chicken and tri-tip, with menu items such as the char ch",
+        "evidence": "\n{'name': \"Pollofino's\", 'address': '6831 Hollister Ave', 'city': 'Goleta', 'state': 'CA', 'categories': 'Restaurants, Mexican', 'hours': {'Monday': '11:0-21:0', 'Tuesday': '11:0-21:0', 'Wednesday': '",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-4",
+        "question": "Summarize the following news within 95 words:",
+        "claim": "A 17-year-old teen, identified as Cassandra C., has completed her chemotherapy treatment for Hodgkin's lymphoma and left Connecticut Children's Medical Center. She was ordered into custody of the Conn",
+        "evidence": "A 17-year-old teen who has been living at Connecticut Children's Medical Center since December while being forced to have chemotherapy to treat Hodgkin's lymphoma has completed treatment and left the ",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-6",
+        "question": "what is a lamp socket switch?",
+        "claim": "A lamp socket switch is an electronic device used to control the power supply to a lamp or other lighting fixture. It is typically installed on the socket of the lamp or attached to it using an adapte",
+        "evidence": "In electrical wiring, a light switch is a switch, most commonly used to operate electric lights, permanently connected equipment, or electrical outlets. Portable lamps such as table lamps may have a l",
+        "true_label": "UNSUPPORTED",
+        "pred_label": "SUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-7",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Santa Barbara Shellfish Company is a local business located at 230 Stearns Wharf in Santa Barbara, CA. It is a seafood restaurant and beer bar that offers live/raw food options. The establishment is k",
+        "evidence": "\n{'name': 'Santa Barbara Shellfish Company', 'address': '230 Stearns Wharf', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Live/Raw Food, Restaurants, Seafood, Beer Bar, Beer, Wine & Spirits,",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-11",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Bistro 1111 is a breakfast, brunch, and American cuisine restaurant located in the Hyatt hotel in Santa Barbara, CA. The restaurant offers both indoor and outdoor seating, and reservations are accepte",
+        "evidence": "\n{'name': 'Bistro 1111', 'address': '1111 E Cabrillo Blvd', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Breakfast & Brunch, American (New), Restaurants', 'hours': {'Monday': '6:30-22:0', 'T",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-12",
+        "question": "home remedies for ear wax removal",
+        "claim": "Based on the provided passages, here are some home remedies for ear wax removal:\n\n1. Place a few drops of olive oil on the ear before bedtime and let the excess oil drop out after a few minutes. Repea",
+        "evidence": "Place a few drops of olive oil on the ear before bedtime. Wait for a few minutes and let the excess oil drop out. Repeat this process in a span of a week sometimes less to help the ear wax go out. Onc",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-13",
+        "question": "Summarize the following news within 62 words:",
+        "claim": "Rapper-turned-actor Common has joined the cast of \"Suicide Squad,\" a Warner Bros. action movie featuring DC Entertainment super-villains. He will join actors like Jared Leto, Will Smith, and Margot Ro",
+        "evidence": "(The Hollywood Reporter)Oscar-winning rapper-turned-actor Common has closed a deal to join the cast of \"Suicide Squad,\" Warner Bros.' all-star action movie featuring DC Entertainment super-villains. D",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-18",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Tony Ray's Restaurant & Cantina is a nightlife, restaurant, and Mexican establishment located at 731 De La Guerra Plz in Santa Barbara, CA. The business operates under the categories of Nightlife, Res",
+        "evidence": "\n{'name': \"TonyRay's Restaurant & Cantina\", 'address': '731 De La Guerra Plz', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Nightlife, Restaurants, Mexican, Dance Clubs', 'hours': None, 'att",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-19",
+        "question": "recipe for spicy rice pilaf",
+        "claim": "Based on the given passages, here is a recipe for spicy rice pilaf:\n\nIngredients:\n\n* 1 cup long-grain rice (white or brown)\n* 2 cups chicken or vegetable stock\n* 1 tsp fennel seeds, crushed\n* 1 bay le",
+        "evidence": "1 Add broth and lentils; bring to a boil. 2  Reduce heat; cover and simmer for 15 minutes. 3  Stir in remaining ingredients; bring to a boil. 4  Reduce heat; cover and simmer 20-25 minutes longer or u",
+        "true_label": "UNSUPPORTED",
+        "pred_label": "SUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-20",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Based on the provided structured data, here is an objective overview of The Palms:\n\nThe Palms is a locally owned restaurant located in Carpinteria, California, offering a variety of dining options inc",
+        "evidence": "\n{'name': 'The Palms', 'address': '701 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Food, Do-It-Yourself Food, Nightlife, American (Traditional), Bars', 'hours': {'Mo",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-22",
+        "question": "tips how to conserve water",
+        "claim": "Conserving water is essential for maintaining water resources and reducing the overall water usage. Here are some tips on how to conserve water based on the given passages:\n\n1. Take shorter showers an",
+        "evidence": "1 Take shorter showers. 2  Replace you showerhead with an ultra-low-flow version. 3  Some units are available that allow you to cut off the flow without adjusting the water temperature knobs. 4  Use t",
+        "true_label": "UNSUPPORTED",
+        "pred_label": "SUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-27",
+        "question": "Summarize the following news within 200 words:",
+        "claim": "A new report reveals how ISIS is trying to legitimise itself by implementing bureaucratic systems and institutions across the territories it controls, as it attempts to portray itself as a functioning",
+        "evidence": "It has all the key points you'd expect on a birth certificate -- baby's weight, length and date of birth confirmed with an official insignia. The difference here is the governing authority's stamp: Th",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-29",
+        "question": "Summarize the following news within 140 words:",
+        "claim": "Five Chinese feminist activists were released on bail after being detained for planning a campaign against sexual harassment. Their families and supporters have mixed feelings about the release, as th",
+        "evidence": "Beijing (CNN)A day after the Chinese government released five young feminists on bail, their families and supporters expressed mixed emotions on the unexpected development. Wei Tingting, Wang Man, Zhe",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-30",
+        "question": "Summarize the following news within 95 words:",
+        "claim": "A 17-year-old girl in the US, who was forced to have chemotherapy against her will after being diagnosed with Hodgkin's lymphoma, has completed her treatment and left hospital. The teenager, identifie",
+        "evidence": "A 17-year-old teen who has been living at Connecticut Children's Medical Center since December while being forced to have chemotherapy to treat Hodgkin's lymphoma has completed treatment and left the ",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-31",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Sure! Here's an objective overview of Harbor Market & Deli based on the provided structured data in JSON format:\n\nHarbor Market & Deli is a restaurant located in Santa Barbara, California, offering a ",
+        "evidence": "\n{'name': 'Harbor Market & Deli', 'address': '125 Harbor Way, Ste 8', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Restaurants, Delis, Food, Grocery', 'hours': None, 'attributes': {'Business",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-33",
+        "question": "Summarize the following news within 66 words:",
+        "claim": "Here is a summary of the news in 69 words:\n\nJohn Edward Crowley, 52, from Windermere, FL, was convicted of felony civil disorder and misdemeanors after participating in the Jan. 6, 2021, breach of the",
+        "evidence": "Windermere man convicted for his role in Jan. 6 Capitol breach\nThis article may contain AI-assisted content.\nWashington, D.C. - John Edward Crowley, a 52-year-old from Windermere, Florida, faced trial",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-34",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Sure! Here's an objective overview of Jeannine's American Bakery Restaurant based on the provided structured data:\n\nJeannine's American Bakery Restaurant is a popular breakfast and brunch spot located",
+        "evidence": "\n{'name': \"Jeannine's American Bakery Restaurant\", 'address': '15 E Figueroa St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'American (New), Food, Breakfast & Brunch, Restaurants, Bakeries",
+        "true_label": "CONTRADICTED",
+        "pred_label": "SUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-37",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Little Caesars Pizza is a popular local business located at 1048 Casitas Pass Rd in Carpinteria, CA. It falls under the categories of Restaurants and Pizza. The business operates from 11:00 AM to 11:0",
+        "evidence": "\n{'name': 'Little Caesars Pizza', 'address': '1048 Casitas Pass Rd', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Pizza', 'hours': {'Monday': '11:0-23:0', 'Tuesday': '11:0-23:0', ",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-38",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "The Palms is a local business located at 701 Linden Ave in Carpinteria, CA. It is a restaurant and bar that offers American (Traditional) cuisine. The business has a rating of 3.5 stars. The establish",
+        "evidence": "\n{'name': 'The Palms', 'address': '701 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Food, Do-It-Yourself Food, Nightlife, American (Traditional), Bars', 'hours': {'Mo",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-42",
+        "question": "how to tie water balloon",
+        "claim": "Based on the given passages, here are the steps to tie a water balloon:\n\n1. Fill the balloon and loop the top over the neck of the balloon.\n2. While holding the neck of the balloon, spin the tool coun",
+        "evidence": "1 Four steps to a water balloon: 2  Fill the balloon and loop over the top. 3  While holding the neck of the balloon (make sure neck of balloon is under tool), proceed to spin tool counter-clockwise i",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-43",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Based on the provided structured data, here is an objective overview of Bill's Bus:\n\nBill's Bus is a local business in Isla Vista, California that offers tours, party bus rentals, bus tours, wine tour",
+        "evidence": "\n{'name': \"Bill's Bus\", 'address': '6575 Seville St Isla Vista Ca', 'city': 'Isla Vista', 'state': 'CA', 'categories': 'Tours, Party Bus Rentals, Bus Tours, Wine Tours, Wedding Planning, Hotels & Trav",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-44",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "The Coffee Bean & Tea Leaf is a local business located at 811 State St in Santa Barbara, CA. It falls under the categories of Food, Restaurants, and Coffee & Tea. The business offers free WiFi and out",
+        "evidence": "\n{'name': 'The Coffee Bean & Tea Leaf', 'address': '811 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Food, Restaurants, Coffee & Tea', 'hours': {'Monday': '6:30-21:0', 'Tuesday': ",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-45",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Guicho's Eatery is a restaurant located at 901 Linden Ave in Carpinteria, CA. They offer a variety of menu options such as Italian cuisine, desserts, sandwiches, and more. Their business hours are Mon",
+        "evidence": "\n{'name': \"Guicho's Eatery\", 'address': '901 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Desserts, Sandwiches, Food, Italian', 'hours': {'Tuesday': '11:30-20:30', 'W",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-46",
+        "question": "Summarize the following news within 195 words:",
+        "claim": "A team of students from the Ahmadu Bello University in Nigeria are developing a car called the \"ABUCAR 2\", which runs on gasoline but also uses a high number of recycled electrical components to maxim",
+        "evidence": "Sleek chassis, alluring paintwork and a need for speed, but these are no ordinary motors. When pedal hits metal, an eco-friendly process gets set in motion. Powered by electricity and engineered for e",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-47",
+        "question": "Summarize the following news within 155 words:",
+        "claim": "Etihad Airways lost Jennifer Stewart\u2019s most important luggage during her recent flight from Abu Dhabi to New York City, which turned out to be her 2-year-old pet cat, Felix. The cat was able to escape",
+        "evidence": "Abu Dhabi, United Arab Emirates (CNN)Lost luggage after a long flight is a common, frustrating occurrence of modern air travel. And sometimes, airlines lose things that are irreplaceable. American Jen",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-48",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Broad Street Oyster Company is a local business located at 418 State St in Santa Barbara, CA. It falls under the categories of Fish & Chips, Seafood, and Restaurants. The business operates from 11:30 ",
+        "evidence": "\n{'name': 'Broad Street Oyster Company', 'address': '418 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Fish & Chips, Seafood, Restaurants', 'hours': {'Monday': '11:30-0:30', 'Tuesd",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      },
+      {
+        "case_id": "case-49",
+        "question": "how to clean mildew from shower curtain liner",
+        "claim": "Sure! Here's my answer based on the given passages:\n\nTo clean mildew from a shower curtain liner, you can follow these steps:\n\n1. Run a gentle wash cycle with 1/2 cup of baking soda added to the deter",
+        "evidence": "Mold and Mildew Treatment. Instead of adding bleach to the wash cycle -- which will also get rid of mold and mildew -- run a gentle wash cycle with 1/2 cup of baking soda added to the detergent in war",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "NUMERICAL"
+      }
+    ],
+    "NEGATION": [],
+    "PARAPHRASE": [],
+    "RETRIEVAL_FAIL": [
+      {
+        "case_id": "case-3",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Sure! Here's an objective overview of Belcampo Meat Co Restaurant based on the provided structured data in JSON format:\n\nBelcampo Meat Co Restaurant is a popular food establishment located in Santa Ba",
+        "evidence": "\n{'name': 'Belcampo Meat Co Restaurant', 'address': '38 W Victoria St, Ste 115', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Food, Meat Shops, American (New), Burgers, Breakfast & Brunch, S",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-15",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Jill's Place is a restaurant located at 632 Santa Barbara St in Santa Barbara, CA. The restaurant offers event planning services and caters to various events such as weddings, parties, and corporate f",
+        "evidence": "\n{'name': \"Jill's Place\", 'address': '632 Santa Barbara St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Event Planning & Services, Caterers, Sandwiches, Bars, Steakhouses, Delis, Nightlife",
+        "true_label": "CONTRADICTED",
+        "pred_label": "SUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-16",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Miramar Beach Bar is a nightlife and active life establishment located in Montecito, California. It offers a variety of activities such as lounging, hotel and travel services, and beaches. The bar fea",
+        "evidence": "\n{'name': 'Miramar Beach Bar', 'address': '1773 S Jameson Ln', 'city': 'Montecito', 'state': 'CA', 'categories': 'Nightlife, Active Life, Bars, Hotels & Travel, Beaches, Lounges', 'hours': {'Monday': ",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-17",
+        "question": "Summarize the following news within 200 words:",
+        "claim": "A Syrian man shared his story of migrating from Turkey to Italy by sea, a journey he made twice after the first attempt ended in failure. He paid $6,500 to a smuggler and was among 300 people crammed ",
+        "evidence": "I would have done anything to get to Europe. It was worth the risk, the bad treatment and the fear, hard as that may be to believe. Simply put, I have a better life now than I did before. But my journ",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-23",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Petrini's Restaurant is located at 5711 Calle Real in Goleta, California. It offers American, Italian, and restaurant cuisine, as well as pizza. The restaurant is open Monday through Sunday from 4:30p",
+        "evidence": "\n{'name': \"Petrini's Restaurant\", 'address': '5711 Calle Real', 'city': 'Goleta', 'state': 'CA', 'categories': 'American (New), Italian, Restaurants, Pizza', 'hours': {'Monday': '16:30-21:0', 'Tuesday",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-24",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Pace Food + Drink is a casual, upscale restaurant located in Santa Barbara, CA, serving American cuisine with a focus on fresh, locally sourced ingredients. According to customer reviews, the service ",
+        "evidence": "\n{'name': 'Pace food+drink', 'address': '413 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Food, Restaurants, American (New)', 'hours': {'Tuesday': '17:0-21:0', 'Wednesday': '17:0-",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-26",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Based on the structured data provided, here is an objective overview of Treehouse Restaurant:\n\nTreehouse Restaurant is an American traditional restaurant located in Santa Barbara, California. It has r",
+        "evidence": "\n{'name': 'Treehouse Restaurant', 'address': '3860 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'American (Traditional), Restaurants', 'hours': {'Monday': '6:0-21:0', 'Tuesday': '6",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-28",
+        "question": "Instruction:\nWrite an objective overview about the following local business based only on the provided structured data i",
+        "claim": "Root 217 is a restaurant located in the UCen building in Goleta, California, serving American (New) cuisine. According to their listed hours, they are open Monday through Friday from 10am to 5pm, and ",
+        "evidence": "\n{'name': 'Root 217', 'address': '1180 UCen Rd', 'city': 'Goleta', 'state': 'CA', 'categories': 'Restaurants, Sandwiches, American (New)', 'hours': {'Monday': '10:0-19:0', 'Tuesday': '10:0-19:0', 'Wed",
+        "true_label": "CONTRADICTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      },
+      {
+        "case_id": "case-35",
+        "question": "how often do you exercise",
+        "claim": "Unable to answer based on given passages.",
+        "evidence": "Aerobic Exercise. The CDC suggests that adults get at least two hours and 30 minutes of moderate aerobic activity per week, or one hour and 15 minutes of vigorous exercise per week. This breaks down t",
+        "true_label": "SUPPORTED",
+        "pred_label": "UNSUPPORTED",
+        "category": "RETRIEVAL_FAIL"
+      }
+    ],
+    "MULTI_HOP": [],
+    "OTHER": []
+  }
+}

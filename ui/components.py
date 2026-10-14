@@ -23,6 +23,7 @@ def get_status_icon(status: str) -> str:
         "SUPPORTED": "✅",
         "UNSUPPORTED": "⚠️",
         "CONTRADICTED": "❌",
+        "UNVERIFIABLE": "❓",
     }.get(status.upper(), "❓")
 
 
@@ -32,6 +33,7 @@ def get_correction_label(action: Optional[str]) -> str:
         "PRESERVED": "✅ Preserved",
         "CORRECTED": "🔧 Corrected",
         "REMOVED_OR_QUALIFIED": "🚫 Removed / Qualified",
+        "ABSTAINED": "❓ Abstained (Unverifiable)",
     }.get(action or "", "— Not processed")
 
 

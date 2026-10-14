@@ -1,0 +1,50 @@
+[
+  {
+    "configuration": "Dense-only",
+    "precision": 0.0667,
+    "recall": 0.3333,
+    "macro_f1": 0.1111,
+    "abstention_rate": 0.0,
+    "latency_ms": 484.22
+  },
+  {
+    "configuration": "+ BM25 Hybrid",
+    "precision": 0.0667,
+    "recall": 0.3333,
+    "macro_f1": 0.1111,
+    "abstention_rate": 0.0,
+    "latency_ms": 450.08
+  },
+  {
+    "configuration": "+ Reranker",
+    "precision": 0.0667,
+    "recall": 0.3333,
+    "macro_f1": 0.1111,
+    "abstention_rate": 0.0,
+    "latency_ms": 442.26
+  },
+  {
+    "configuration": "+ MiniCheck NLI",
+    "precision": 0.2,
+    "recall": 0.3333,
+    "macro_f1": 0.25,
+    "abstention_rate": 0.0,
+    "latency_ms": 8666.18
+  },
+  {
+    "configuration": "+ Abstention",
+    "precision": 0.2778,
+    "recall": 0.4444,
+    "macro_f1": 0.3,
+    "abstention_rate": 60.0,
+    "latency_ms": 4196.4
+  },
+  {
+    "configuration": "No Retrieval (NLI)",
+    "precision": 0.2,
+    "recall": 0.3333,
+    "macro_f1": 0.25,
+    "abstention_rate": 0.0,
+    "latency_ms": 8122.72
+  }
+]

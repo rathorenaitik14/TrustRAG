@@ -15,3 +15,22 @@ python-dotenv
 pytest
 google-genai
 pytest-mock
+
+# ── Publication upgrade ────────────────────────────────────────────────────
+# Stage 1: Public benchmarks
+datasets>=2.14.0            # HuggingFace datasets (RAGTruth, HaluEval)
+
+# Stage 2: Stronger retrieval
+rank-bm25>=0.2.2            # BM25 lexical retrieval for hybrid search
+
+# Stage 2: Stronger NLI (MiniCheck – EMNLP 2024)
+# Install from source if pip package is unavailable:
+#   pip install git+https://github.com/Liyan06/MiniCheck.git
+minicheck>=0.1.0
+
+# Stage 1: Baselines
+ragas>=0.1.0                # RAGAS faithfulness baseline
+
+# Stage 1: Statistical reporting (publication-grade)
+scipy>=1.11.0               # Chi-squared / McNemar test
+statsmodels>=0.14.0         # Contingency table tests (optional, scipy covers most)

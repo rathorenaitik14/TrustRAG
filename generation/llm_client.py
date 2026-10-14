@@ -30,7 +30,7 @@ class GeminiClient(LLMClient):
             
         # Get from args or environment variables
         self._api_key = api_key or os.getenv("LLM_API_KEY") or os.getenv("GEMINI_API_KEY")
-        self._model_name = model_name or os.getenv("LLM_MODEL") or os.getenv("GEMINI_MODEL") or "gemini-3.8-flash"
+        self._model_name = model_name or os.getenv("LLM_MODEL") or os.getenv("GEMINI_MODEL") or "gemini-flash-lite-latest"
         
         if not self._api_key:
             raise ValueError(
@@ -49,24 +49,36 @@ class GeminiClient(LLMClient):
 
     def generate(self, system_prompt: str, user_prompt: str) -> str:
         import time
-        max_retries = 6
-        for attempt in range(max_retries):
-            try:
-                response = self.client.models.generate_content(
-                    model=self._model_name,
-                    contents=user_prompt,
-                    config=genai.types.GenerateContentConfig(
-                        system_instruction=system_prompt,
-                        temperature=0.0
+        # Candidate model order: requested model first, then verified fallbacks
+        candidate_models = [self._model_name]
+        for fb in ["gemini-flash-lite-latest", "gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-flash-latest"]:
+            if fb not in candidate_models:
+                candidate_models.append(fb)
+
+        last_error = None
+        for model in candidate_models:
+            for attempt in range(2):
+                try:
+                    response = self.client.models.generate_content(
+                        model=model,
+                        contents=user_prompt,
+                        config=genai.types.GenerateContentConfig(
+                            system_instruction=system_prompt,
+                            temperature=0.0
+                        )
                     )
-                )
-                return response.text
-            except Exception as e:
-                err_str = str(e)
-                if ("503" in err_str or "429" in err_str) and attempt < max_retries - 1:
-                    time.sleep(10 + (2 ** attempt))  # 10s base + exponential
-                    continue
-                raise RuntimeError(f"LLM API request failed: {e}")
+                    if response and response.text:
+                        self._model_name = model
+                        return response.text
+                except Exception as e:
+                    last_error = e
+                    err_lower = str(e).lower()
+                    # If model is unavailable / high demand (503) or not found (404), switch model immediately
+                    if any(p in err_lower for p in ["503", "unavailable", "404", "not found", "not_found", "high demand"]):
+                        break
+                    time.sleep(1.0)
+
+        raise RuntimeError(f"LLM API request failed across all candidate models: {last_error}")
 
 def get_llm_client() -> LLMClient:
     """Factory function to get the configured LLM client."""

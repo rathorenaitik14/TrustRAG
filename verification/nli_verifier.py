@@ -15,11 +15,12 @@ class NLIVerifier(BaseVerifier):
     """
     def __init__(
         self, 
-        model_name: str = "cross-encoder/nli-deberta-v3-small", 
+        model_name: str = "lytang/MiniCheck-DeBERTa-v3-Large", 
         entailment_threshold: float = 0.5, 
-        contradiction_threshold: float = 0.5
+        contradiction_threshold: float = 0.5,
+        use_numeric_checker: bool = True
     ):
-        super().__init__(entailment_threshold, contradiction_threshold)
+        super().__init__(entailment_threshold, contradiction_threshold, use_numeric_checker)
         self.model_name = model_name
         # We use CrossEncoder which returns logits for pairs
         self.model = CrossEncoder(model_name)
@@ -40,20 +41,35 @@ class NLIVerifier(BaseVerifier):
         # cross-encoder/nli-deberta-v3-small mapping:
         # 0: contradiction, 1: entailment, 2: neutral
         probs = softmax(logits)
-        contradiction_score = float(probs[0])
-        entailment_score = float(probs[1])
-        neutral_score = float(probs[2])
-
-        # Evaluate logic for this specific evidence chunk
-        if contradiction_score > entailment_score and contradiction_score >= self.contradiction_threshold:
-            status = "CONTRADICTED"
-            score = contradiction_score
-        elif entailment_score >= self.entailment_threshold:
-            status = "SUPPORTED"
-            score = entailment_score
+        if len(probs) >= 3:
+            contradiction_score = float(probs[0])
+            entailment_score = float(probs[1])
+            neutral_score = float(probs[2])
+            if contradiction_score > entailment_score and contradiction_score >= self.contradiction_threshold:
+                status = "CONTRADICTED"
+                score = contradiction_score
+            elif entailment_score >= self.entailment_threshold:
+                status = "SUPPORTED"
+                score = entailment_score
+            else:
+                status = "UNSUPPORTED"
+                score = max(entailment_score, contradiction_score, neutral_score)
         else:
-            status = "UNSUPPORTED"
-            score = max(entailment_score, contradiction_score, neutral_score)
+            # Binary fact-checking model (e.g. MiniCheck): [0: not supported, 1: supported]
+            not_supported_score = float(probs[0])
+            entailment_score = float(probs[1])
+            neutral_score = 0.0
+            contradiction_score = not_supported_score if not_supported_score >= 0.70 else 0.0
+
+            if entailment_score >= self.entailment_threshold:
+                status = "SUPPORTED"
+                score = entailment_score
+            elif not_supported_score >= 0.70:
+                status = "CONTRADICTED"
+                score = not_supported_score
+            else:
+                status = "UNSUPPORTED"
+                score = not_supported_score
 
         return {
             "status": status,

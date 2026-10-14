@@ -36,6 +36,8 @@ DEFAULTS = {
     # Config
     "retrieval_k": 10,
     "rerank_k": 5,
+    "use_numeric_checker": True,
+    "use_calibrated_abstention": True,
 }
 
 

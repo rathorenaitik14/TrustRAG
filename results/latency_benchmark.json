@@ -1,0 +1,34 @@
+{
+  "Numeric Contradiction Checker": {
+    "mean_ms": 0.08,
+    "std_ms": 0.02,
+    "p50_ms": 0.08,
+    "p95_ms": 0.11,
+    "device": "CPU",
+    "n_runs": 25
+  },
+  "Plain NLI (DeBERTa-small)": {
+    "mean_ms": 107.19,
+    "std_ms": 3.18,
+    "p50_ms": 107.66,
+    "p95_ms": 112.3,
+    "device": "CPU",
+    "n_runs": 25
+  },
+  "MiniCheck NLI (DeBERTa-large)": {
+    "mean_ms": 1269.92,
+    "std_ms": 319.48,
+    "p50_ms": 1373.65,
+    "p95_ms": 1630.38,
+    "device": "CPU",
+    "n_runs": 25
+  },
+  "Calibrated Abstention Verifier": {
+    "mean_ms": 1192.77,
+    "std_ms": 685.28,
+    "p50_ms": 1505.83,
+    "p95_ms": 1840.19,
+    "device": "CPU",
+    "n_runs": 25
+  }
+}

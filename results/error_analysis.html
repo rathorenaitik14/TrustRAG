@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TrustRAG Error Analysis</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 2em; }
+  h1 { color: #2c3e50; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 0.85em; }
+  th { background: #2c3e50; color: white; }
+  tr:nth-child(even) { background: #f8f9fa; }
+  .cat-numerical { background: #fff3cd; }
+  .cat-negation { background: #f8d7da; }
+  .cat-paraphrase { background: #d1ecf1; }
+  .cat-retrieval_fail { background: #d4edda; }
+  .cat-other { background: #e2e3e5; }
+  .stat { font-size: 1.1em; margin: 0.5em 0; }
+</style>
+</head>
+<body>
+<h1>TrustRAG — Error Analysis Report</h1>
+<p class="stat">Total cases: <strong>50</strong> |
+   Correct: <strong>13</strong> |
+   Accuracy: <strong>0.260</strong></p>
+
+<h2>Error Category Summary</h2>
+<table>
+  <tr><th>Category</th><th>Count</th><th>% of Errors</th></tr>
+  <tr><td>NUMERICAL</td><td>28</td><td>75.7%</td></tr><tr><td>NEGATION</td><td>0</td><td>0.0%</td></tr><tr><td>PARAPHRASE</td><td>0</td><td>0.0%</td></tr><tr><td>RETRIEVAL_FAIL</td><td>9</td><td>24.3%</td></tr><tr><td>MULTI_HOP</td><td>0</td><td>0.0%</td></tr><tr><td>OTHER</td><td>0</td><td>0.0%</td></tr>
+</table>
+
+<h2>Failure Examples</h2>
+<table>
+  <tr>
+    <th>Case ID</th><th>Category</th><th>True</th><th>Pred</th>
+    <th>Claim (truncated)</th><th>Evidence (truncated)</th>
+  </tr>
+  
+                <tr class="cat-numerical">
+                    <td>case-1</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Based on the provided structured data, here is an objective overview of PizzaMan Dan's:
+
+PizzaMan Dan's is a popular restaurant located in Carpinteria</td>
+                    <td>
+{'name': "PizzaMan Dan's", 'address': '699 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Chicken Wings, Restaurants, Beer, Wine &</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-2</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Pollofino's is a Mexican restaurant located in Goleta, CA, with a 4.0-star rating based on 3 reviews. The restaurant is known for its delicious chicke</td>
+                    <td>
+{'name': "Pollofino's", 'address': '6831 Hollister Ave', 'city': 'Goleta', 'state': 'CA', 'categories': 'Restaurants, Mexican', 'hours': {'Monday': '</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-4</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>A 17-year-old teen, identified as Cassandra C., has completed her chemotherapy treatment for Hodgkin's lymphoma and left Connecticut Children's Medica</td>
+                    <td>A 17-year-old teen who has been living at Connecticut Children's Medical Center since December while being forced to have chemotherapy to treat Hodgki</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-6</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>UNSUPPORTED</td>
+                    <td>SUPPORTED</td>
+                    <td>A lamp socket switch is an electronic device used to control the power supply to a lamp or other lighting fixture. It is typically installed on the so</td>
+                    <td>In electrical wiring, a light switch is a switch, most commonly used to operate electric lights, permanently connected equipment, or electrical outlet</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-7</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Santa Barbara Shellfish Company is a local business located at 230 Stearns Wharf in Santa Barbara, CA. It is a seafood restaurant and beer bar that of</td>
+                    <td>
+{'name': 'Santa Barbara Shellfish Company', 'address': '230 Stearns Wharf', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Live/Raw Food, Res</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-11</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Bistro 1111 is a breakfast, brunch, and American cuisine restaurant located in the Hyatt hotel in Santa Barbara, CA. The restaurant offers both indoor</td>
+                    <td>
+{'name': 'Bistro 1111', 'address': '1111 E Cabrillo Blvd', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Breakfast & Brunch, American (New),</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-12</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Based on the provided passages, here are some home remedies for ear wax removal:
+
+1. Place a few drops of olive oil on the ear before bedtime and let </td>
+                    <td>Place a few drops of olive oil on the ear before bedtime. Wait for a few minutes and let the excess oil drop out. Repeat this process in a span of a w</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-13</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Rapper-turned-actor Common has joined the cast of "Suicide Squad," a Warner Bros. action movie featuring DC Entertainment super-villains. He will join</td>
+                    <td>(The Hollywood Reporter)Oscar-winning rapper-turned-actor Common has closed a deal to join the cast of "Suicide Squad," Warner Bros.' all-star action </td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-18</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Tony Ray's Restaurant & Cantina is a nightlife, restaurant, and Mexican establishment located at 731 De La Guerra Plz in Santa Barbara, CA. The busine</td>
+                    <td>
+{'name': "TonyRay's Restaurant & Cantina", 'address': '731 De La Guerra Plz', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Nightlife, Resta</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-19</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>UNSUPPORTED</td>
+                    <td>SUPPORTED</td>
+                    <td>Based on the given passages, here is a recipe for spicy rice pilaf:
+
+Ingredients:
+
+* 1 cup long-grain rice (white or brown)
+* 2 cups chicken or vegeta</td>
+                    <td>1 Add broth and lentils; bring to a boil. 2  Reduce heat; cover and simmer for 15 minutes. 3  Stir in remaining ingredients; bring to a boil. 4  Reduc</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-20</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Based on the provided structured data, here is an objective overview of The Palms:
+
+The Palms is a locally owned restaurant located in Carpinteria, Ca</td>
+                    <td>
+{'name': 'The Palms', 'address': '701 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Food, Do-It-Yourself Food, Night</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-22</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>UNSUPPORTED</td>
+                    <td>SUPPORTED</td>
+                    <td>Conserving water is essential for maintaining water resources and reducing the overall water usage. Here are some tips on how to conserve water based </td>
+                    <td>1 Take shorter showers. 2  Replace you showerhead with an ultra-low-flow version. 3  Some units are available that allow you to cut off the flow witho</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-27</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>A new report reveals how ISIS is trying to legitimise itself by implementing bureaucratic systems and institutions across the territories it controls,</td>
+                    <td>It has all the key points you'd expect on a birth certificate -- baby's weight, length and date of birth confirmed with an official insignia. The diff</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-29</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Five Chinese feminist activists were released on bail after being detained for planning a campaign against sexual harassment. Their families and suppo</td>
+                    <td>Beijing (CNN)A day after the Chinese government released five young feminists on bail, their families and supporters expressed mixed emotions on the u</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-30</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>A 17-year-old girl in the US, who was forced to have chemotherapy against her will after being diagnosed with Hodgkin's lymphoma, has completed her tr</td>
+                    <td>A 17-year-old teen who has been living at Connecticut Children's Medical Center since December while being forced to have chemotherapy to treat Hodgki</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-31</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Sure! Here's an objective overview of Harbor Market & Deli based on the provided structured data in JSON format:
+
+Harbor Market & Deli is a restaurant</td>
+                    <td>
+{'name': 'Harbor Market & Deli', 'address': '125 Harbor Way, Ste 8', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Restaurants, Delis, Food,</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-33</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Here is a summary of the news in 69 words:
+
+John Edward Crowley, 52, from Windermere, FL, was convicted of felony civil disorder and misdemeanors afte</td>
+                    <td>Windermere man convicted for his role in Jan. 6 Capitol breach
+This article may contain AI-assisted content.
+Washington, D.C. - John Edward Crowley, a</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-34</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>SUPPORTED</td>
+                    <td>Sure! Here's an objective overview of Jeannine's American Bakery Restaurant based on the provided structured data:
+
+Jeannine's American Bakery Restaur</td>
+                    <td>
+{'name': "Jeannine's American Bakery Restaurant", 'address': '15 E Figueroa St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'American (New</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-37</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Little Caesars Pizza is a popular local business located at 1048 Casitas Pass Rd in Carpinteria, CA. It falls under the categories of Restaurants and </td>
+                    <td>
+{'name': 'Little Caesars Pizza', 'address': '1048 Casitas Pass Rd', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Pizza', 'hours'</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-38</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>The Palms is a local business located at 701 Linden Ave in Carpinteria, CA. It is a restaurant and bar that offers American (Traditional) cuisine. The</td>
+                    <td>
+{'name': 'The Palms', 'address': '701 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Food, Do-It-Yourself Food, Night</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-42</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Based on the given passages, here are the steps to tie a water balloon:
+
+1. Fill the balloon and loop the top over the neck of the balloon.
+2. While h</td>
+                    <td>1 Four steps to a water balloon: 2  Fill the balloon and loop over the top. 3  While holding the neck of the balloon (make sure neck of balloon is und</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-43</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Based on the provided structured data, here is an objective overview of Bill's Bus:
+
+Bill's Bus is a local business in Isla Vista, California that off</td>
+                    <td>
+{'name': "Bill's Bus", 'address': '6575 Seville St Isla Vista Ca', 'city': 'Isla Vista', 'state': 'CA', 'categories': 'Tours, Party Bus Rentals, Bus </td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-44</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>The Coffee Bean & Tea Leaf is a local business located at 811 State St in Santa Barbara, CA. It falls under the categories of Food, Restaurants, and C</td>
+                    <td>
+{'name': 'The Coffee Bean & Tea Leaf', 'address': '811 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Food, Restaurants, Coffee & </td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-45</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Guicho's Eatery is a restaurant located at 901 Linden Ave in Carpinteria, CA. They offer a variety of menu options such as Italian cuisine, desserts, </td>
+                    <td>
+{'name': "Guicho's Eatery", 'address': '901 Linden Ave', 'city': 'Carpinteria', 'state': 'CA', 'categories': 'Restaurants, Desserts, Sandwiches, Food</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-46</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>A team of students from the Ahmadu Bello University in Nigeria are developing a car called the "ABUCAR 2", which runs on gasoline but also uses a high</td>
+                    <td>Sleek chassis, alluring paintwork and a need for speed, but these are no ordinary motors. When pedal hits metal, an eco-friendly process gets set in m</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-47</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Etihad Airways lost Jennifer Stewart’s most important luggage during her recent flight from Abu Dhabi to New York City, which turned out to be her 2-y</td>
+                    <td>Abu Dhabi, United Arab Emirates (CNN)Lost luggage after a long flight is a common, frustrating occurrence of modern air travel. And sometimes, airline</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-48</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Broad Street Oyster Company is a local business located at 418 State St in Santa Barbara, CA. It falls under the categories of Fish & Chips, Seafood, </td>
+                    <td>
+{'name': 'Broad Street Oyster Company', 'address': '418 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Fish & Chips, Seafood, Rest</td>
+                </tr>
+                <tr class="cat-numerical">
+                    <td>case-49</td>
+                    <td><code>NUMERICAL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Sure! Here's my answer based on the given passages:
+
+To clean mildew from a shower curtain liner, you can follow these steps:
+
+1. Run a gentle wash cy</td>
+                    <td>Mold and Mildew Treatment. Instead of adding bleach to the wash cycle -- which will also get rid of mold and mildew -- run a gentle wash cycle with 1/</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-3</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Sure! Here's an objective overview of Belcampo Meat Co Restaurant based on the provided structured data in JSON format:
+
+Belcampo Meat Co Restaurant i</td>
+                    <td>
+{'name': 'Belcampo Meat Co Restaurant', 'address': '38 W Victoria St, Ste 115', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Food, Meat Sho</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-15</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>SUPPORTED</td>
+                    <td>Jill's Place is a restaurant located at 632 Santa Barbara St in Santa Barbara, CA. The restaurant offers event planning services and caters to various</td>
+                    <td>
+{'name': "Jill's Place", 'address': '632 Santa Barbara St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Event Planning & Services, Caterer</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-16</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Miramar Beach Bar is a nightlife and active life establishment located in Montecito, California. It offers a variety of activities such as lounging, h</td>
+                    <td>
+{'name': 'Miramar Beach Bar', 'address': '1773 S Jameson Ln', 'city': 'Montecito', 'state': 'CA', 'categories': 'Nightlife, Active Life, Bars, Hotels</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-17</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>A Syrian man shared his story of migrating from Turkey to Italy by sea, a journey he made twice after the first attempt ended in failure. He paid $6,5</td>
+                    <td>I would have done anything to get to Europe. It was worth the risk, the bad treatment and the fear, hard as that may be to believe. Simply put, I have</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-23</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Petrini's Restaurant is located at 5711 Calle Real in Goleta, California. It offers American, Italian, and restaurant cuisine, as well as pizza. The r</td>
+                    <td>
+{'name': "Petrini's Restaurant", 'address': '5711 Calle Real', 'city': 'Goleta', 'state': 'CA', 'categories': 'American (New), Italian, Restaurants, </td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-24</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Pace Food + Drink is a casual, upscale restaurant located in Santa Barbara, CA, serving American cuisine with a focus on fresh, locally sourced ingred</td>
+                    <td>
+{'name': 'Pace food+drink', 'address': '413 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'Food, Restaurants, American (New)', 'ho</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-26</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Based on the structured data provided, here is an objective overview of Treehouse Restaurant:
+
+Treehouse Restaurant is an American traditional restaur</td>
+                    <td>
+{'name': 'Treehouse Restaurant', 'address': '3860 State St', 'city': 'Santa Barbara', 'state': 'CA', 'categories': 'American (Traditional), Restauran</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-28</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>CONTRADICTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Root 217 is a restaurant located in the UCen building in Goleta, California, serving American (New) cuisine. According to their listed hours, they are</td>
+                    <td>
+{'name': 'Root 217', 'address': '1180 UCen Rd', 'city': 'Goleta', 'state': 'CA', 'categories': 'Restaurants, Sandwiches, American (New)', 'hours': {'</td>
+                </tr>
+                <tr class="cat-retrieval_fail">
+                    <td>case-35</td>
+                    <td><code>RETRIEVAL_FAIL</code></td>
+                    <td>SUPPORTED</td>
+                    <td>UNSUPPORTED</td>
+                    <td>Unable to answer based on given passages.</td>
+                    <td>Aerobic Exercise. The CDC suggests that adults get at least two hours and 30 minutes of moderate aerobic activity per week, or one hour and 15 minutes</td>
+                </tr>
+</table>
+</body>
+</html>

@@ -7,9 +7,22 @@ class BaseVerifier(ABC):
     """
     Abstract base class for claim verification.
     """
-    def __init__(self, entailment_threshold: float = 0.5, contradiction_threshold: float = 0.5):
+    def __init__(
+        self, 
+        entailment_threshold: float = 0.5, 
+        contradiction_threshold: float = 0.5,
+        use_numeric_checker: bool = True
+    ):
         self.entailment_threshold = entailment_threshold
         self.contradiction_threshold = contradiction_threshold
+        self.use_numeric_checker = use_numeric_checker
+        self.numeric_checker = None
+        if use_numeric_checker:
+            try:
+                from .numeric_checker import NumericContradictionChecker
+                self.numeric_checker = NumericContradictionChecker()
+            except Exception:
+                self.numeric_checker = None
 
     @abstractmethod
     def verify_single_evidence(self, claim_text: str, evidence_text: str) -> Dict[str, Any]:
@@ -44,10 +57,14 @@ class BaseVerifier(ABC):
         for ev in evidence_items:
             ev_id = ev.get("evidence_id", "")
             ev_text = ev.get("text", "")
+            pred = None
             
             # Predict single evidence
             try:
                 pred = self.verify_single_evidence(claim_text, ev_text)
+                # Apply 0.08ms analytical Numeric Contradiction Checker
+                if self.numeric_checker and pred.get("status") != "CONTRADICTED":
+                    pred = self.numeric_checker.override_nli_result(pred, claim_text, ev_text)
                 status = pred["status"]
                 score = pred["score"]
             except Exception as e:
@@ -59,7 +76,7 @@ class BaseVerifier(ABC):
                 "evidence_id": ev_id,
                 "status": status,
                 "score": score,
-                "reason": None
+                "reason": pred.get("reason", None) if isinstance(pred, dict) else None
             })
 
             if status == "SUPPORTED" and score > max_entail_score:
@@ -80,7 +97,12 @@ class BaseVerifier(ABC):
             final_status = "CONTRADICTED"
             final_score = max_contra_score
             evidence_ids = [best_contra_ev] if best_contra_ev else []
-            reason = "The strongest relevant evidence contradicts the claim."
+            contra_reason = None
+            for d in evidence_details:
+                if d.get("evidence_id") == best_contra_ev and d.get("reason"):
+                    contra_reason = d.get("reason")
+                    break
+            reason = contra_reason or "The strongest relevant evidence contradicts the claim."
         # Condition 2: Strong entailment
         elif max_entail_score >= self.entailment_threshold:
             final_status = "SUPPORTED"

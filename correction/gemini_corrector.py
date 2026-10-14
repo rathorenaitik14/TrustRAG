@@ -92,9 +92,19 @@ class GeminiCorrector(BaseCorrector):
         cleaned_response = cleaned_response.strip()
 
         try:
-            parsed_data = json.loads(cleaned_response)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Failed to parse LLM response as JSON: {e}. Raw response: {raw_response}")
+            parsed_data = json.loads(cleaned_response, strict=False)
+        except json.JSONDecodeError:
+            import re
+            fixed = re.sub(r'\\([^"\\/bfnrtu])', r'\\\\\1', cleaned_response)
+            try:
+                parsed_data = json.loads(fixed, strict=False)
+            except json.JSONDecodeError:
+                m = re.search(r'(\{[\s\S]*\})', cleaned_response)
+                if m:
+                    fixed_inner = re.sub(r'\\([^"\\/bfnrtu])', r'\\\\\1', m.group(1))
+                    parsed_data = json.loads(fixed_inner, strict=False)
+                else:
+                    raise ValueError(f"Failed to parse LLM response as JSON. Raw response: {raw_response}")
 
         # Validate structure
         if "original_answer" not in parsed_data or "corrected_answer" not in parsed_data or "changes" not in parsed_data:
